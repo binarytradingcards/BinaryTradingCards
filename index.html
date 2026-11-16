@@ -556,7 +556,7 @@ Note: Customer notified that resale/tax-exempt certificate must be sent to binar
     async function confirmAndSubmitForm() {
         const button = document.getElementById('sendOrderButton');
         button.disabled = true;
-        button.textContent = 'Sending order to Google Sheets & generating invoice...';
+        button.textContent = 'Preparing draft invoice & notification...';
 
         let totalUnits = 0;
         Object.values(quantities).forEach(q => totalUnits += q);
@@ -600,7 +600,6 @@ Note: Customer notified that resale/tax-exempt certificate must be sent to binar
         const webhookUrl = 'https://script.google.com/macros/s/AKfycbwURnvQvq6e2MfYEsjOMLr4AdhwZkMnm74KtQysFA6ykd6Ks8OtW3jRDajY-Xd5caQ8/exec';
 
         try {
-            // Await fetch directly so mobile browsers keep the connection open until Google Apps Script finishes
             await fetch(webhookUrl, {
                 method: 'POST',
                 mode: 'no-cors',
@@ -608,12 +607,12 @@ Note: Customer notified that resale/tax-exempt certificate must be sent to binar
                 body: JSON.stringify(formData)
             });
 
-            button.textContent = 'Order Sent Successfully! 🎉';
+            button.textContent = 'Order Submitted Successfully! 🎉';
             button.className = 'w-full py-3.5 px-4 bg-emerald-600 text-white font-bold rounded-xl shadow-lg';
             
             setTimeout(() => {
                 closeModal();
-                alert('Order submitted successfully! Your Google Sheet has been updated and your PDF invoice has been emailed to binarytradingcards@gmail.com.');
+                alert('Order submitted successfully! Please check your email for your draft invoice summary and await contact from Binary Trading Cards LLC.');
                 location.reload();
             }, 1000);
 
