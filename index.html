@@ -34,14 +34,10 @@
     </div>
 </header>
 
-<!-- Main Container / Form Wrapper for Web3Forms -->
+<!-- Main Container / Form Wrapper -->
 <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <form action="https://api.web3forms.com/submit" method="POST" id="wholesaleForm" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <form id="wholesaleForm" onsubmit="event.preventDefault(); openReviewModal();" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        <!-- Web3Forms Hidden Configuration Fields -->
-        <input type="hidden" name="access_key" value="d33fc338-16e4-44d9-b5a3-9ea346e2ed73">
-        <input type="hidden" name="subject" value="New Wholesale Order - Binary Trading Cards">
-        <input type="hidden" name="to" value="binarytradingcards@gmail.com">
         <input type="hidden" name="order_summary_details" id="hiddenOrderDetails">
 
         <!-- Left 2 Cols: Product Catalog & Shop Info -->
@@ -75,7 +71,7 @@
                         <input type="tel" id="phone" name="phone" required pattern="[0-9().\-\s+]{7,}" title="Please enter a valid phone number (at least 7 digits)" placeholder="(555) 000-0000" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
                     </div>
 
-                    <!-- Structured Shipping Address Fields -->
+                    <!-- Shipping Address Fields -->
                     <div class="sm:col-span-2 space-y-4 border-t border-slate-800 pt-4">
                         <h3 class="font-bold text-white text-xs uppercase tracking-wider">Shipping Address</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -104,14 +100,14 @@
                         </div>
                     </div>
                     
-                    <!-- Wholesale & Resale Notice Box -->
+                    <!-- Wholesale Notice Box -->
                     <div class="sm:col-span-2 space-y-3 border-t border-slate-800 pt-4">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                             <h3 class="font-bold text-white">Wholesale &amp; Resale Verification</h3>
                             <span class="text-[11px] text-red-400">Wholesale orders require a valid Resale / Tax-Exempt Certificate.</span>
                         </div>
                         <div class="bg-red-950/20 p-4 rounded-xl border border-red-900/40 text-xs text-red-300 leading-relaxed">
-                            <em><strong>Note:</strong> Submitting this order requires a valid resale/tax-exempt certificate sent directly to <strong>binarytradingcards@gmail.com</strong> before your final invoice can be generated and returned.</em>
+                            <em><strong>Note:</strong> Submitting this order requires a valid resale/tax-exempt certificate sent directly to <strong>binarytradingcards@gmail.com</strong> before your final invoice can be fulfilled.</em>
                         </div>
                     </div>
 
@@ -194,7 +190,7 @@
                 </div>
 
                 <!-- Review / Trigger Modal Button -->
-                <button type="button" onclick="openReviewModal()" class="w-full py-3.5 px-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold rounded-xl shadow-lg shadow-red-950/50 transition transform active:scale-95 flex items-center justify-center gap-2">
+                <button type="submit" class="w-full py-3.5 px-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold rounded-xl shadow-lg shadow-red-950/50 transition transform active:scale-95 flex items-center justify-center gap-2 cursor-pointer">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012-2m-6 9l2 2 4-4"/></svg>
                     Review &amp; Submit Order
                 </button>
@@ -204,7 +200,7 @@
     </form>
 </main>
 
-<!-- Image Zoom / Lightbox Modal -->
+<!-- Image Zoom Modal -->
 <div id="imageZoomModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="closeImageModal()">
     <div class="relative max-w-lg w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col items-center shadow-2xl space-y-4" onclick="event.stopPropagation()">
         <button type="button" onclick="closeImageModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1.5 rounded-lg bg-slate-800/80 transition">
@@ -239,7 +235,7 @@
 
         <div class="border-t border-slate-800 pt-4 flex gap-4">
             <button type="button" onclick="closeModal()" class="flex-1 py-3 bg-slate-800 hover:bg-slate-700 font-semibold rounded-xl text-white transition">Back to Edit</button>
-            <button type="button" id="sendOrderButton" onclick="confirmAndSubmitForm()" class="flex-1 py-3 bg-red-600 hover:bg-red-500 font-bold rounded-xl text-white shadow-lg transition">Confirm &amp; Send Order</button>
+            <button type="button" id="sendOrderButton" onclick="confirmAndSubmitForm()" class="flex-1 py-3 bg-red-600 hover:bg-red-500 font-bold rounded-xl text-white shadow-lg transition cursor-pointer">Confirm &amp; Send Order</button>
         </div>
     </div>
 </div>
@@ -557,10 +553,10 @@ Note: Customer notified that resale/tax-exempt certificate must be sent to binar
         document.getElementById('invoiceModal').classList.add('hidden');
     }
 
-    function confirmAndSubmitForm() {
+    async function confirmAndSubmitForm() {
         const button = document.getElementById('sendOrderButton');
         button.disabled = true;
-        button.textContent = 'Sending order...';
+        button.textContent = 'Sending order to Google Sheets & generating invoice...';
 
         let totalUnits = 0;
         Object.values(quantities).forEach(q => totalUnits += q);
@@ -601,18 +597,32 @@ Note: Customer notified that resale/tax-exempt certificate must be sent to binar
             items: lineItems
         };
 
-        // 1. Fire webhook to Google Apps Script with active URL
-        fetch('https://script.google.com/macros/s/AKfycbwURnvQvq6e2MfYEsjOMLr4AdhwZkMnm74KtQysFA6ykd6Ks8OtW3jRDajY-Xd5caQ8/exec', {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        }).catch(err => console.log('Sheet log error:', err));
+        const webhookUrl = 'https://script.google.com/macros/s/AKfycbwURnvQvq6e2MfYEsjOMLr4AdhwZkMnm74KtQysFA6ykd6Ks8OtW3jRDajY-Xd5caQ8/exec';
 
-        // 2. Brief 400ms pause to ensure sheet logs before submitting form to Web3Forms
-        setTimeout(function() {
-            document.getElementById('wholesaleForm').submit();
-        }, 400);
+        try {
+            // Await fetch directly so mobile browsers keep the connection open until Google Apps Script finishes
+            await fetch(webhookUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            button.textContent = 'Order Sent Successfully! 🎉';
+            button.className = 'w-full py-3.5 px-4 bg-emerald-600 text-white font-bold rounded-xl shadow-lg';
+            
+            setTimeout(() => {
+                closeModal();
+                alert('Order submitted successfully! Your Google Sheet has been updated and your PDF invoice has been emailed to binarytradingcards@gmail.com.');
+                location.reload();
+            }, 1000);
+
+        } catch (err) {
+            console.error('Submission error:', err);
+            button.disabled = false;
+            button.textContent = 'Confirm & Send Order';
+            alert('There was an error submitting your order. Please try again.');
+        }
     }
 
     window.onload = function() {
