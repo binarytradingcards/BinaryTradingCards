@@ -257,34 +257,8 @@
                 const delta = parseInt(this.getAttribute('data-delta'), 10);
                 quantities[color] = Math.max(0, (quantities[color] || 0) + delta);
                 
-                const inputEl = document.querySelector(`.qty-input[data-color="${CSS.escape(color)}"]`);
-                if (inputEl) inputEl.value = quantities[color];
-                
-                updateCardVisualAndTotals();
-            };
-        });
-
-        document.querySelectorAll('.qty-input').forEach(input => {
-            input.oninput = function() {
-                const color = this.getAttribute('data-color');
-                quantities[color] = Math.max(0, parseInt(this.value, 10) || 0);
-                updateCardVisualAndTotals();
-            };
-        });
-    }
-
-    function updateCardVisualAndTotals() {
-        let totalUnits = 0;
-        Object.values(quantities).forEach(q => totalUnits += q);
-        
-        const unitPrice = getUnitPrice(totalUnits);
-        const subtotal = totalUnits * unitPrice;
-        const shipping = (totalUnits === 0) ? 0 : (subtotal >= 300 ? 0 : 15.00);
-        const grandTotal = subtotal + shipping;
-
-        document.getElementById('summaryTotalUnits').innerText = `${totalUnits} units`;
-        document.getElementById('summaryUnitPrice').innerText = `$${unitPrice.toFixed(2)} / unit`;
-        document.getElementById('summarySubtotal').innerText = `$${subtotal.toFixed(2)}`;
+                const inputEl = document.querySelector(`.qty-input[data-color="${CSS.escape(color)}"]`); if (inputEl) inputEl.value = quantities[color];  updateCardVisualAndTotals(); }; });  document.querySelectorAll('.qty-input').forEach(input => { input.oninput = function() { const color = this.getAttribute('data-color'); quantities[color] = Math.max(0, parseInt(this.value, 10) \vert{}\vert{} 0); updateCardVisualAndTotals(); }; }); }  function updateCardVisualAndTotals() { let totalUnits = 0; Object.values(quantities).forEach(q => totalUnits += q);  const unitPrice = getUnitPrice(totalUnits); const subtotal = totalUnits * unitPrice; const shipping = (totalUnits === 0) ? 0 : (subtotal >= 300 ? 0 : 15.00); const grandTotal = subtotal + shipping;  document.getElementById('summaryTotalUnits').innerText = `${totalUnits} units`;
+        document.getElementById('summaryUnitPrice').innerText = `$${unitPrice.toFixed(2)} / unit`; document.getElementById('summarySubtotal').innerText = `$${subtotal.toFixed(2)}`;
         
         const shippingEl = document.getElementById('summaryShipping');
         const noticeEl = document.getElementById('shippingNotice');
@@ -297,10 +271,7 @@
         } else {
             shippingEl.innerText = '$15.00';
             const neededForFree = Math.max(0, 300 - subtotal);
-            noticeEl.innerText = `Add $${neededForFree.toFixed(2)} more for FREE shipping!`;
-        }
-
-        document.getElementById('summaryGrandTotal').innerText = `$${grandTotal.toFixed(2)}`;
+            noticeEl.innerText = `Add $${neededForFree.toFixed(2)} more for FREE shipping!`; }  document.getElementById('summaryGrandTotal').innerText = `$${grandTotal.toFixed(2)}`;
         updateTierProgress(totalUnits, unitPrice);
     }
 
@@ -351,52 +322,10 @@
                 progressPct = ((totalUnits - 100) / 50) * 100;
             }
             document.getElementById('tierStatusText').innerText = currentTierName;
-            document.getElementById('tierNextGoal').innerText = `${nextGoal - totalUnits} units to next tier`;
-        }
-
-        document.getElementById('badgeTier').innerText = `$${currentPrice.toFixed(2)}/unit`;
-        document.getElementById('tierProgressBar').style.width = `${Math.min(100, Math.max(0, progressPct))}%`;
-    }
-
-    const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({"&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"}[char]));
-
-    function openReviewModal() {
-        const storeName = document.getElementById('storeName').value.trim();
-        const contactName = document.getElementById('contactName').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const address = document.getElementById('address').value.trim();
-
-        if (!storeName || !contactName || !email || !phone || !address) {
-            alert('Please fill out all required Retail Partner Details before submitting.');
-            return;
-        }
-
-        if (!document.getElementById('email').checkValidity()) {
-            alert('Please enter a valid email address.');
-            return;
-        }
-
-        let totalUnits = 0;
-        Object.values(quantities).forEach(q => totalUnits += q);
-        if (totalUnits === 0) {
-            alert('Please select at least one unit to order.');
-            return;
-        }
-
-        const unitPrice = getUnitPrice(totalUnits);
-        const subtotal = totalUnits * unitPrice;
-        const shipping = subtotal >= 300 ? 0 : 15.00;
-        const grandTotal = subtotal + shipping;
-
-        let itemsTextSummary = "";
-        let itemsHtml = '<ul class="divide-y divide-slate-800">';
-        colors.forEach((color, index) => {
-            const q = quantities[color];
-            if (q > 0) {
-                const lineStr = `#${index + 1} ${color}: ${q} units @ $${unitPrice.toFixed(2)} = $${(q * unitPrice).toFixed(2)}\n`;
+            document.getElementById('tierNextGoal').innerText = `${nextGoal - totalUnits} units to next tier`; }  document.getElementById('badgeTier').innerText = `$${currentPrice.toFixed(2)}/unit`;
+        document.getElementById('tierProgressBar').style.width = `${Math.min(100, Math.max(0, progressPct))}\%`; }  const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({"&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"}[char]));  function openReviewModal() { const storeName = document.getElementById('storeName').value.trim(); const contactName = document.getElementById('contactName').value.trim(); const email = document.getElementById('email').value.trim(); const phone = document.getElementById('phone').value.trim(); const address = document.getElementById('address').value.trim();  if (!storeName \vert{}\vert{} !contactName \vert{}\vert{} !email \vert{}\vert{} !phone \vert{}\vert{} !address) { alert('Please fill out all required Retail Partner Details before submitting.'); return; }  if (!document.getElementById('email').checkValidity()) { alert('Please enter a valid email address.'); return; }  let totalUnits = 0; Object.values(quantities).forEach(q => totalUnits += q); if (totalUnits === 0) { alert('Please select at least one unit to order.'); return; }  const unitPrice = getUnitPrice(totalUnits); const subtotal = totalUnits * unitPrice; const shipping = subtotal >= 300 ? 0 : 15.00; const grandTotal = subtotal + shipping;  let itemsTextSummary = ""; let itemsHtml = '<ul class="divide-y divide-slate-800">'; colors.forEach((color, index) => { const q = quantities[color]; if (q > 0) { const lineStr = `#${index + 1} ${color}:${q} units @ $${unitPrice.toFixed(2)} =$${(q * unitPrice).toFixed(2)}\n`;
                 itemsTextSummary += lineStr;
-                itemsHtml += `<li class="py-2 flex justify-between text-xs"><span>#${index + 1} ${color} (x${q})</span> <span class="font-bold text-white">$${(q * unitPrice).toFixed(2)}</span></li>`;
+                itemsHtml += `<li class="py-2 flex justify-between text-xs"><span>#${index + 1}${color} (x${q})</span> <span class="font-bold text-white">$${(q * unitPrice).toFixed(2)}</span></li>`;
             }
         });
         itemsHtml += '</ul>';
@@ -404,17 +333,15 @@
         const fullSummaryText = 
 `--- STORE & CONTACT ---
 Store: ${storeName}
-Contact: ${contactName} (${phone} / ${email})
+Contact: ${contactName} (${phone} /${email})
 Shipping Address: ${address}
 
 --- ORDER ITEMS ---
 ${itemsTextSummary}
 --- FINANCIALS ---
 Total Units: ${totalUnits}
-Unit Price Tier: $${unitPrice.toFixed(2)} / unit
-Subtotal: $${subtotal.toFixed(2)}
-Shipping: ${shipping === 0 ? 'FREE ($300+ threshold)' : '$15.00'}
-Grand Total: $${grandTotal.toFixed(2)}
+Unit Price Tier: $${unitPrice.toFixed(2)} / unit Subtotal: $${subtotal.toFixed(2)}
+Shipping: ${shipping === 0 ? 'FREE ($300+ threshold)' : '$15.00'} Grand Total: $${grandTotal.toFixed(2)}
 
 Note: Customer notified that resale/tax-exempt certificate must be sent to binarytradingcards@gmail.com.`;
 
@@ -424,7 +351,7 @@ Note: Customer notified that resale/tax-exempt certificate must be sent to binar
         modalBody.innerHTML = `
             <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
                 <p><strong>Store:</strong> ${escapeHtml(storeName)}</p>
-                <p><strong>Contact:</strong> ${escapeHtml(contactName)} (${escapeHtml(phone)} / ${escapeHtml(email)})</p>
+                <p><strong>Contact:</strong> ${escapeHtml(contactName)} (${escapeHtml(phone)} /${escapeHtml(email)})</p>
                 <p><strong>Shipping Address:</strong> ${escapeHtml(address)}</p>
                 <p><strong>Tax Certificate Notice:</strong> Pending email submission to binarytradingcards@gmail.com</p>
             </div>
@@ -433,32 +360,4 @@ Note: Customer notified that resale/tax-exempt certificate must be sent to binar
                 ${itemsHtml}
             </div>
             <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-1 text-xs">
-                <div class="flex justify-between"><span>Total Units:</span> <strong class="text-white">${totalUnits}</strong></div>
-                <div class="flex justify-between"><span>Unit Price Tier:</span> <strong class="text-white">$${unitPrice.toFixed(2)} / unit</strong></div>
-                <div class="flex justify-between"><span>Subtotal:</span> <strong class="text-white">$${subtotal.toFixed(2)}</strong></div>
-                <div class="flex justify-between"><span>Shipping:</span> <strong class="text-white">${shipping === 0 ? 'FREE' : '$15.00'}</strong></div>
-                <div class="flex justify-between border-t border-slate-800 pt-2 text-sm font-bold text-red-400"><span>Grand Total:</span> <span>$${grandTotal.toFixed(2)}</span></div>
-            </div>
-        `;
-
-        document.getElementById('invoiceModal').classList.remove('hidden');
-    }
-
-    function closeModal() {
-        document.getElementById('invoiceModal').classList.add('hidden');
-    }
-
-    function confirmAndSubmitForm() {
-        const button = document.getElementById('sendOrderButton');
-        button.disabled = true;
-        button.textContent = 'Sending order...';
-        document.getElementById('wholesaleForm').submit();
-    }
-
-    window.onload = function() {
-        renderProductGrid();
-    };
-</script>
-
-</body>
-</html>
+                <div class="flex justify-between">
