@@ -133,7 +133,7 @@
                             <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
                             2. Select Graded Card Guard Colors
                         </h2>
-                        <p class="text-xs text-slate-400 mt-1">Select quantities across all 46 colors. Pricing applies to total units ordered.</p>
+                        <p class="text-xs text-slate-400 mt-1">Select quantities across all 46 colors. Click any thumbnail to inspect closely.</p>
                     </div>
                     <button type="button" onclick="resetAllQuantities()" class="text-xs text-red-400 hover:text-red-300 font-medium px-3 py-1.5 rounded-lg bg-red-950/40 border border-red-900/50 transition">Reset Quantities</button>
                 </div>
@@ -203,6 +203,22 @@
     </form>
 </main>
 
+<!-- Image Zoom / Lightbox Modal -->
+<div id="imageZoomModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="closeImageModal()">
+    <div class="relative max-w-lg w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col items-center shadow-2xl space-y-4" onclick="event.stopPropagation()">
+        <button type="button" onclick="closeImageModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1.5 rounded-lg bg-slate-800/80 transition">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <div class="w-full max-h-[70vh] flex items-center justify-center overflow-hidden rounded-xl bg-slate-950 border border-slate-800/80 p-2">
+            <img id="zoomedImg" src="" alt="" class="max-h-[65vh] max-w-full object-contain rounded-lg shadow-lg" />
+        </div>
+        <div class="text-center">
+            <h3 id="zoomedTitle" class="text-lg font-bold text-white tracking-wide"></h3>
+            <p class="text-xs text-slate-400 mt-0.5">Binary Trading Cards LLC • Graded Card Guard</p>
+        </div>
+    </div>
+</div>
+
 <!-- Modal / Invoice Preview Overlay -->
 <div id="invoiceModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
     <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 my-8">
@@ -235,54 +251,54 @@
 
 <!-- JavaScript Application Logic -->
 <script>
-    // 46 Color Variants mapped to exact image filenames and background SKUs (#1 through #46)
+    // 46 Color Variants mapped to exact display name filenames and background SKUs (#1 through #46)
     const productCatalog = [
-        { name: "YELLOW", img: "images/guards/yellow.png" },
-        { name: "PURPLE", img: "images/guards/purple.png" },
-        { name: "RED", img: "images/guards/red.png" },
-        { name: "PINK", img: "images/guards/pink.png" },
-        { name: "BLUE", img: "images/guards/blue.png" },
-        { name: "GOLDEN", img: "images/guards/gold.png" },
-        { name: "CRYSTAL", img: "images/guards/clear.png" },
-        { name: "ORANGE", img: "images/guards/orange.png" },
-        { name: "CORAL", img: "images/guards/coral.png" },
-        { name: "SOLAR DUST", img: "images/guards/solar-dust.png" },
-        { name: "MIDNIGHT BLUE", img: "images/guards/midnight-blue.png" },
-        { name: "CRIMSON BLACK", img: "images/guards/crimson-black.png" },
-        { name: "OCEAN", img: "images/guards/ocean.png" },
-        { name: "LUNAR", img: "images/guards/lunar.png" },
-        { name: "BIOHAZARD", img: "images/guards/biohazard.png" },
-        { name: "THUNDERSTORM", img: "images/guards/thunderstorm.png" },
-        { name: "COSMO", img: "images/guards/cosmo.png" },
-        { name: "ICEBERG", img: "images/guards/iceberg.png" },
-        { name: "SUNSET", img: "images/guards/sunset.png" },
-        { name: "SOLAR SKY", img: "images/guards/solar-sky.png" },
-        { name: "CYBER CYAN", img: "images/guards/cyan.png" },
-        { name: "PASTEL SKY", img: "images/guards/pastel-sky.png" },
-        { name: "ICE AGE", img: "images/guards/ice-age.png" },
-        { name: "ARTIC NIGHT", img: "images/guards/artic-night.png" },
-        { name: "PINK CARBON", img: "images/guards/pink-carbon.png" },
-        { name: "PURPLE ACID", img: "images/guards/purple-acid.png" },
-        { name: "VIOLA GLASS", img: "images/guards/viola-glass.png" },
-        { name: "MAGENTA", img: "images/guards/magenta.png" },
-        { name: "STORM", img: "images/guards/storm.png" },
-        { name: "SUNFLARE", img: "images/guards/sunflare.png" },
-        { name: "CRYSTAL JADE", img: "images/guards/crystal-jade.png" },
-        { name: "ROSSO CORSA", img: "images/guards/rosso-corsa.png" },
-        { name: "PURPLE ICE", img: "images/guards/purple-ice.png" },
-        { name: "LEMON LIME", img: "images/guards/lemon-lime.png" },
-        { name: "TOXIC VOID", img: "images/guards/toxic-void.png" },
-        { name: "DARK MATTER", img: "images/guards/dark-matter.png" },
-        { name: "COCKTAIL", img: "images/guards/cocktail.png" },
-        { name: "CRYSTAL BLUE", img: "images/guards/crystal-blue.png" },
-        { name: "AQUA VIOLET", img: "images/guards/aqua-violet.png" },
-        { name: "TROPICAL NEON", img: "images/guards/tropical-neon.png" },
-        { name: "KALEIDOSCOPE", img: "images/guards/kaleidoscope.png" },
-        { name: "SUNRISE", img: "images/guards/sunrise.png" },
-        { name: "EMBER", img: "images/guards/ember.png" },
-        { name: "BURNT ORANGE", img: "images/guards/burnt-orange.png" },
-        { name: "ELEMENTAL", img: "images/guards/elemental.png" },
-        { name: "VOLT", img: "images/guards/volt.png" }
+        { name: "YELLOW", img: "yellow.png" },
+        { name: "PURPLE", img: "purple.png" },
+        { name: "RED", img: "red.png" },
+        { name: "PINK", img: "pink.png" },
+        { name: "BLUE", img: "blue.png" },
+        { name: "GOLDEN", img: "golden.png" },
+        { name: "CRYSTAL", img: "crystal.png" },
+        { name: "ORANGE", img: "orange.png" },
+        { name: "CORAL", img: "coral.png" },
+        { name: "SOLAR DUST", img: "solar-dust.png" },
+        { name: "MIDNIGHT BLUE", img: "midnight-blue.png" },
+        { name: "CRIMSON BLACK", img: "crimson-black.png" },
+        { name: "OCEAN", img: "ocean.png" },
+        { name: "LUNAR", img: "lunar.png" },
+        { name: "BIOHAZARD", img: "biohazard.png" },
+        { name: "THUNDERSTORM", img: "thunderstorm.png" },
+        { name: "COSMO", img: "cosmo.png" },
+        { name: "ICEBERG", img: "iceberg.png" },
+        { name: "SUNSET", img: "sunset.png" },
+        { name: "SOLAR SKY", img: "solar-sky.png" },
+        { name: "CYBER CYAN", img: "cyber-cyan.png" },
+        { name: "PASTEL SKY", img: "pastel-sky.png" },
+        { name: "ICE AGE", img: "ice-age.png" },
+        { name: "ARTIC NIGHT", img: "artic-night.png" },
+        { name: "PINK CARBON", img: "pink-carbon.png" },
+        { name: "PURPLE ACID", img: "purple-acid.png" },
+        { name: "VIOLA GLASS", img: "viola-glass.png" },
+        { name: "MAGENTA", img: "magenta.png" },
+        { name: "STORM", img: "storm.png" },
+        { name: "SUNFLARE", img: "sunflare.png" },
+        { name: "CRYSTAL JADE", img: "crystal-jade.png" },
+        { name: "ROSSO CORSA", img: "rosso-corsa.png" },
+        { name: "PURPLE ICE", img: "purple-ice.png" },
+        { name: "LEMON LIME", img: "lemon-lime.png" },
+        { name: "TOXIC VOID", img: "toxic-void.png" },
+        { name: "DARK MATTER", img: "dark-matter.png" },
+        { name: "COCKTAIL", img: "cocktail.png" },
+        { name: "CRYSTAL BLUE", img: "crystal-blue.png" },
+        { name: "AQUA VIOLET", img: "aqua-violet.png" },
+        { name: "TROPICAL NEON", img: "tropical-neon.png" },
+        { name: "KALEIDOSCOPE", img: "kaleidoscope.png" },
+        { name: "SUNRISE", img: "sunrise.png" },
+        { name: "EMBER", img: "ember.png" },
+        { name: "BURNT ORANGE", img: "burnt-orange.png" },
+        { name: "ELEMENTAL", img: "elemental.png" },
+        { name: "VOLT", img: "volt.png" }
     ];
 
     let quantities = {};
@@ -302,9 +318,9 @@
             
             card.innerHTML = `
                 <div class="flex items-center space-x-3 mb-3">
-                    <!-- Photo Thumbnail with background accounting number watermark -->
-                    <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center overflow-hidden relative flex-shrink-0">
-                        <img src="${item.img}" alt="${color}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                    <!-- Photo Thumbnail with click-to-enlarge zoom handler -->
+                    <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center overflow-hidden relative flex-shrink-0 cursor-pointer hover:border-red-500 transition group" onclick="openImageModal('${item.img}', '${color}')" title="Click to enlarge">
+                        <img src="${item.img}" alt="${color}" class="w-full h-full object-cover group-hover:scale-105 transition duration-200" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
                         <span class="absolute inset-0 flex items-center justify-center font-bold text-[10px] text-slate-500 bg-slate-900" style="display: none;">${skuNumber}</span>
                         <div class="absolute bottom-0 right-0 bg-slate-950/80 px-1 rounded-tl text-[9px] font-bold text-slate-400">${skuNumber}</div>
                     </div>
@@ -324,6 +340,16 @@
         
         attachGridListeners();
         calculateOrderTotals();
+    }
+
+    function openImageModal(imgSrc, title) {
+        document.getElementById('zoomedImg').src = imgSrc;
+        document.getElementById('zoomedTitle').innerText = title;
+        document.getElementById('imageZoomModal').classList.remove('hidden');
+    }
+
+    function closeImageModal() {
+        document.getElementById('imageZoomModal').classList.add('hidden');
     }
 
     function attachGridListeners() {
@@ -545,7 +571,8 @@ Note: Customer notified that resale/tax-exempt certificate must be sent to binar
         const shipping = subtotal >= 300 ? 0 : 15.00;
         const grandTotal = subtotal + shipping;
 
-        // Build structured line items with exact SKUs (#1 through #46) for the Apps Script invoice generator
+        const fullAddress = `${document.getElementById('streetAddress').value}${document.getElementById('addressUnit').value ? ', ' + document.getElementById('addressUnit').value : ''}, ${document.getElementById('city').value}, ${document.getElementById('state').value} ${document.getElementById('zip').value}`;
+
         const lineItems = [];
         productCatalog.forEach((item, index) => {
             const color = item.name;
@@ -566,7 +593,7 @@ Note: Customer notified that resale/tax-exempt certificate must be sent to binar
             contact_name: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
             email: document.getElementById('email').value,
             phone: document.getElementById('phone').value,
-            shipping_address: `${document.getElementById('streetAddress').value}${document.getElementById('addressUnit').value ? ', ' + document.getElementById('addressUnit').value : ''}, ${document.getElementById('city').value}, ${document.getElementById('state').value} ${document.getElementById('zip').value}`,
+            shipping_address: fullAddress,
             total_units: totalUnits,
             unit_price: `$${unitPrice.toFixed(2)}`,
             subtotal: `$${subtotal.toFixed(2)}`,
@@ -576,16 +603,18 @@ Note: Customer notified that resale/tax-exempt certificate must be sent to binar
             items: lineItems
         };
 
-        // Silently trigger Google Apps Script webhook for Google Sheet logging & PDF invoice email
-        fetch('https://script.google.com/macros/s/AKfycbwdmpStPofG_heegubjFHsFanabWG5edGgCm_By4vLqnBlIjzmH7VQUnqM63HZSCS675w/exec', {
+        // 1. Fire webhook to Google Apps Script with active URL
+        fetch('https://script.google.com/macros/s/AKfycbwURnvQvq6e2MfYEsjOMLr4AdhwZkMnm74KtQysFA6ykd6Ks8OtW3jRDajY-Xd5caQ8/exec', {
             method: 'POST',
             mode: 'no-cors',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
         }).catch(err => console.log('Sheet log error:', err));
 
-        // Submit form to Web3Forms for email notification delivery
-        document.getElementById('wholesaleForm').submit();
+        // 2. Brief 400ms pause to ensure sheet logs before submitting form to Web3Forms
+        setTimeout(function() {
+            document.getElementById('wholesaleForm').submit();
+        }, 400);
     }
 
     window.onload = function() {
