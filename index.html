@@ -12,11 +12,12 @@
     </style>
 </head>
 <body class="min-h-screen bg-slate-950 text-slate-200 font-sans flex flex-col antialiased">
+
 <!-- Header / Branding -->
 <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-30 shadow-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
         <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-red-600 to-cyan-500 flex items-center justify-center font-black text-white text-lg shadow-lg">B</div>
+            <img src="binarytradingcardslogo.jpeg" alt="Binary Trading Cards LLC Logo" class="w-10 h-10 rounded-xl object-contain bg-slate-900 border border-slate-800 shadow-lg flex-shrink-0">
             <div>
                 <h1 class="text-xl font-bold tracking-tight text-white">Binary Trading Cards LLC</h1>
                 <p class="text-xs text-slate-400">www.binarytradingcards.com • Wholesale Order Portal</p>
@@ -103,7 +104,7 @@
                         </div>
                     </div>
                     
-                    <!-- Wholesale & Resale Notice Box (Red Text) -->
+                    <!-- Wholesale & Resale Notice Box -->
                     <div class="sm:col-span-2 space-y-3 border-t border-slate-800 pt-4">
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                             <h3 class="font-bold text-white">Wholesale &amp; Resale Verification</h3>
@@ -232,7 +233,6 @@
             </button>
         </div>
 
-        <!-- Modal Content (Filled via JS) -->
         <div id="modalBody" class="space-y-4 text-sm text-slate-300 max-h-96 overflow-y-auto pr-2">
             <!-- Details injected -->
         </div>
@@ -251,7 +251,6 @@
 
 <!-- JavaScript Application Logic -->
 <script>
-    // 46 Color Variants mapped to exact display name filenames and background SKUs (#1 through #46)
     const productCatalog = [
         { name: "YELLOW", img: "yellow.png" },
         { name: "PURPLE", img: "purple.png" },
@@ -318,7 +317,6 @@
             
             card.innerHTML = `
                 <div class="flex items-center space-x-3 mb-3">
-                    <!-- Photo Thumbnail with click-to-enlarge zoom handler -->
                     <div class="w-12 h-12 rounded-lg bg-slate-900 border border-slate-800 flex items-center justify-center overflow-hidden relative flex-shrink-0 cursor-pointer hover:border-red-500 transition group" onclick="openImageModal('${item.img}', '${color}')" title="Click to enlarge">
                         <img src="${item.img}" alt="${color}" class="w-full h-full object-cover group-hover:scale-105 transition duration-200" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
                         <span class="absolute inset-0 flex items-center justify-center font-bold text-[10px] text-slate-500 bg-slate-900" style="display: none;">${skuNumber}</span>
