@@ -25,8 +25,7 @@
         <!-- Tier Schedule Badge Banner -->
         <div class="flex flex-wrap items-center gap-2 text-xs font-medium bg-slate-950/80 px-4 py-2 rounded-xl border border-slate-800">
             <span class="text-slate-400 font-semibold mr-1">Tiers:</span>
-            <span class="px-2 py-1 rounded bg-slate-800 text-slate-300">1-24: $12</span>
-            <span class="px-2 py-1 rounded bg-slate-800 text-slate-300">25-49: $10</span>
+            <span class="px-2 py-1 rounded bg-slate-800 text-slate-300">1-49: $10</span>
             <span class="px-2 py-1 rounded bg-slate-800 text-slate-300">50-99: $9</span>
             <span class="px-2 py-1 rounded bg-slate-800 text-slate-300">100-149: $8</span>
             <span class="px-2 py-1 rounded bg-red-950/80 text-red-300 border border-red-900/50 font-bold">150+: $7 🔥</span>
@@ -34,159 +33,145 @@
     </div>
 </header>
 
-<!-- Main Container -->
-<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Main Container / Form Wrapper for Web3Forms -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <form action="https://api.web3forms.com/submit" method="POST" id="wholesaleForm" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Web3Forms Hidden Configuration Fields -->
+        <input type="hidden" name="access_key" value="d33fc338-16e4-44d9-b5a3-9ea346e2ed73">
+        <input type="hidden" name="subject" value="New Wholesale Order - Binary Trading Cards">
+        <input type="hidden" name="to" value="binarytradingcards@gmail.com">
+        <input type="hidden" name="order_summary_details" id="hiddenOrderDetails">
 
-    <!-- Left 2 Cols: Product Catalog & Shop Info -->
-    <div class="lg:col-span-2 space-y-8">
+        <!-- Left 2 Cols: Product Catalog & Shop Info -->
+        <div class="lg:col-span-2 space-y-8">
 
-        <!-- Shop Info Section -->
-        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-md">
-            <h2 class="text-base font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
-                <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                1. Retail Partner Details
-            </h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                <div>
-                    <label class="block text-slate-400 mb-1 font-medium">Store Name *</label>
-                    <input type="text" id="storeName" placeholder="e.g. Metro City Collectibles" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
-                </div>
-                <div>
-                    <label class="block text-slate-400 mb-1 font-medium">Contact Person *</label>
-                    <input type="text" id="contactName" placeholder="e.g. John Doe" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
-                </div>
-                <div>
-                    <label class="block text-slate-400 mb-1 font-medium">Email Address *</label>
-                    <input type="email" id="email" placeholder="store@example.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
-                </div>
-                <div>
-                    <label class="block text-slate-400 mb-1 font-medium">Phone Number *</label>
-                    <input type="tel" id="phone" placeholder="(555) 000-0000" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
-                </div>
-                <div class="sm:col-span-2">
-                    <label class="block text-slate-400 mb-1 font-medium">Shipping Address *</label>
-                    <input type="text" id="address" placeholder="Street Address, City, State, ZIP" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
-                </div>
-                
-                <!-- Wholesale & Resale Verification Box -->
-                <div class="sm:col-span-2 space-y-3 border-t border-slate-800 pt-4">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                        <h3 class="font-bold text-white">Wholesale &amp; Resale Verification</h3>
-                        <span class="text-[11px] text-slate-400">Wholesale orders require a valid Resale / Tax-Exempt Certificate.</span>
+            <!-- Shop Info Section -->
+            <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-md">
+                <h2 class="text-base font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                    1. Retail Partner Details
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <label class="block text-slate-400 mb-1 font-medium">Store Name *</label>
+                        <input type="text" id="storeName" name="store_name" required placeholder="e.g. Metro City Collectibles" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1 font-medium">Contact Person *</label>
+                        <input type="text" id="contactName" name="contact_name" required placeholder="e.g. John Doe" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1 font-medium">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="store@example.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1 font-medium">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="(555) 000-0000" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label class="block text-slate-400 mb-1 font-medium">Shipping Address *</label>
+                        <input type="text" id="address" name="shipping_address" required placeholder="Street Address, City, State, ZIP" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
+                    </div>
+                    
+                    <!-- Wholesale & Resale Notice Box -->
+                    <div class="sm:col-span-2 space-y-3 border-t border-slate-800 pt-4">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                            <h3 class="font-bold text-white">Wholesale &amp; Resale Verification</h3>
+                            <span class="text-[11px] text-slate-400">Wholesale orders require a valid Resale / Tax-Exempt Certificate.</span>
+                        </div>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs text-slate-300 leading-relaxed">
+                            <em><strong>Note:</strong> Submitting this order requires a valid resale/tax-exempt certificate sent directly to <strong>binarytradingcards@gmail.com</strong> before your final invoice can be generated and returned.</em>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        <label class="flex items-start gap-3 bg-slate-950 p-3.5 rounded-xl border border-slate-800 cursor-pointer hover:border-slate-700 transition">
-                            <input type="radio" name="partnerType" value="returning" checked onchange="toggleCertUpload()" class="mt-0.5 text-red-600 focus:ring-red-500">
-                            <div class="text-xs">
-                                <span class="font-bold text-white block">Returning Partner</span>
-                                <span class="text-slate-400">Resale certificate is already on file.</span>
-                            </div>
-                        </label>
-
-                        <label class="flex items-start gap-3 bg-slate-950 p-3.5 rounded-xl border border-slate-800 cursor-pointer hover:border-slate-700 transition">
-                            <input type="radio" name="partnerType" value="new" onchange="toggleCertUpload()" class="mt-0.5 text-red-600 focus:ring-red-500">
-                            <div class="text-xs">
-                                <span class="font-bold text-white block">First-Time Wholesale Buyer</span>
-                                <span class="text-slate-400">Attach resale / tax-exempt certificate.</span>
-                            </div>
-                        </label>
+                    <div>
+                        <label class="block text-slate-400 mb-1 font-medium">Instagram Handle (Optional)</label>
+                        <input type="text" id="instagram" name="instagram_handle" placeholder="@binary_trading_cards" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
                     </div>
-
-                    <!-- Optional File Upload Block (Shown for New Buyers) -->
-                    <div id="newPartnerCertBlock" hidden class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                        <label for="exemptionForm" class="block text-xs font-semibold text-slate-300">Upload Resale / Tax-Exempt Certificate (Optional)</label>
-                        <input id="exemptionForm" type="file" accept="application/pdf,image/jpeg,image/png,.pdf,.jpg,.jpeg,.png" class="w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-800 file:text-white hover:file:bg-slate-700">
-                        <p class="text-[11px] text-slate-500">PDF, JPG, or PNG up to 2 MB. If you don't have it handy right now, you can still submit your order and email it to support@binarytradingcards.com.</p>
+                    <div>
+                        <label class="block text-slate-400 mb-1 font-medium">Facebook Page (Optional)</label>
+                        <input type="text" id="facebook" name="facebook_page" placeholder="facebook.com/shop" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
                     </div>
                 </div>
+            </section>
 
-                <div>
-                    <label class="block text-slate-400 mb-1 font-medium">Instagram Handle (Optional)</label>
-                    <input type="text" id="instagram" placeholder="@shophandle" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
+            <!-- Product Selection Section -->
+            <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-md">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                    <div>
+                        <h2 class="text-base font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                            <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                            2. Select Graded Card Guard Colors
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-1">Select quantities across all 46 colors. Pricing applies to total units ordered.</p>
+                    </div>
+                    <button type="button" onclick="resetAllQuantities()" class="text-xs text-red-400 hover:text-red-300 font-medium px-3 py-1.5 rounded-lg bg-red-950/40 border border-red-900/50 transition">Reset Quantities</button>
                 </div>
-                <div>
-                    <label class="block text-slate-400 mb-1 font-medium">Facebook Page (Optional)</label>
-                    <input type="text" id="facebook" placeholder="facebook.com/shop" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-red-500 transition">
-                </div>
-            </div>
-        </section>
 
-        <!-- Product Selection Section -->
-        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-md">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-                <div>
-                    <h2 class="text-base font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                        <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-                        2. Select Graded Card Guard Colors
-                    </h2>
-                    <p class="text-xs text-slate-400 mt-1">Select quantities across all 46 colors. Pricing applies to total units ordered.</p>
+                <!-- Product Grid -->
+                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <!-- Injected via JavaScript -->
                 </div>
-                <button type="button" onclick="resetAllQuantities()" class="text-xs text-red-400 hover:text-red-300 font-medium px-3 py-1.5 rounded-lg bg-red-950/40 border border-red-900/50 transition">Reset Quantities</button>
-            </div>
+            </section>
 
-            <!-- Product Grid -->
-            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <!-- Injected via JavaScript -->
-            </div>
-        </section>
-
-    </div>
-
-    <!-- Right Col: Sticky Summary & Checkout -->
-    <div class="lg:col-span-1">
-        <div class="sticky top-24 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-6">
-            <h2 class="text-base font-bold text-white uppercase tracking-wider border-b border-slate-800 pb-3 flex items-center justify-between">
-                <span>Order Summary</span>
-                <span id="badgeTier" class="text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 font-semibold">Tier: $12/unit</span>
-            </h2>
-
-            <!-- Progress to Next Tier -->
-            <div class="space-y-2 bg-slate-950 p-4 rounded-xl border border-slate-800/80">
-                <div class="flex justify-between text-xs font-semibold">
-                    <span id="tierStatusText" class="text-slate-300">Calculating...</span>
-                    <span id="tierNextGoal" class="text-red-400"></span>
-                </div>
-                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-                    <div id="tierProgressBar" class="bg-gradient-to-r from-red-600 to-cyan-400 h-full w-0 transition-all duration-300"></div>
-                </div>
-            </div>
-
-            <!-- Calculation breakdown -->
-            <div class="space-y-3 text-sm">
-                <div class="flex justify-between text-slate-400">
-                    <span>Total Units Selected:</span>
-                    <span id="summaryTotalUnits" class="font-bold text-white">0 units</span>
-                </div>
-                <div class="flex justify-between text-slate-400">
-                    <span>Current Unit Price:</span>
-                    <span id="summaryUnitPrice" class="font-bold text-white">$12.00 / unit</span>
-                </div>
-                <div class="flex justify-between text-slate-400">
-                    <span>Subtotal:</span>
-                    <span id="summarySubtotal" class="font-bold text-white">$0.00</span>
-                </div>
-                <div class="flex justify-between text-slate-400">
-                    <span>Estimated Shipping:</span>
-                    <span id="summaryShipping" class="font-bold text-white">$15.00</span>
-                </div>
-                <div class="text-xs text-slate-500 italic text-right" id="shippingNotice">Free shipping on orders over $300!</div>
-            </div>
-
-            <!-- Grand Total -->
-            <div class="pt-4 border-t border-slate-800 flex justify-between items-baseline">
-                <span class="text-base font-bold text-white">Grand Total:</span>
-                <span id="summaryGrandTotal" class="text-2xl font-black text-red-500">$0.00</span>
-            </div>
-
-            <!-- Submit Button -->
-            <button type="button" onclick="submitOrder()" class="w-full py-3.5 px-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold rounded-xl shadow-lg shadow-red-950/50 transition transform active:scale-95 flex items-center justify-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012-2m-6 9l2 2 4-4"/></svg>
-                Review &amp; Submit Order
-            </button>
         </div>
-    </div>
 
+        <!-- Right Col: Sticky Summary & Checkout -->
+        <div class="lg:col-span-1">
+            <div class="sticky top-24 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl space-y-6">
+                <h2 class="text-base font-bold text-white uppercase tracking-wider border-b border-slate-800 pb-3 flex items-center justify-between">
+                    <span>Order Summary</span>
+                    <span id="badgeTier" class="text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 font-semibold">Tier: $10/unit</span>
+                </h2>
+
+                <!-- Progress to Next Tier -->
+                <div class="space-y-2 bg-slate-950 p-4 rounded-xl border border-slate-800/80">
+                    <div class="flex justify-between text-xs font-semibold">
+                        <span id="tierStatusText" class="text-slate-300">Calculating...</span>
+                        <span id="tierNextGoal" class="text-red-400"></span>
+                    </div>
+                    <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                        <div id="tierProgressBar" class="bg-gradient-to-r from-red-600 to-cyan-400 h-full w-0 transition-all duration-300"></div>
+                    </div>
+                </div>
+
+                <!-- Calculation breakdown -->
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between text-slate-400">
+                        <span>Total Units Selected:</span>
+                        <span id="summaryTotalUnits" class="font-bold text-white">0 units</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Current Unit Price:</span>
+                        <span id="summaryUnitPrice" class="font-bold text-white">$10.00 / unit</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Subtotal:</span>
+                        <span id="summarySubtotal" class="font-bold text-white">$0.00</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Estimated Shipping:</span>
+                        <span id="summaryShipping" class="font-bold text-white">$15.00</span>
+                    </div>
+                    <div class="text-xs text-slate-500 italic text-right" id="shippingNotice">Free shipping on orders over $300!</div>
+                </div>
+
+                <!-- Grand Total -->
+                <div class="pt-4 border-t border-slate-800 flex justify-between items-baseline">
+                    <span class="text-base font-bold text-white">Grand Total:</span>
+                    <span id="summaryGrandTotal" class="text-2xl font-black text-red-500">$0.00</span>
+                </div>
+
+                <!-- Review / Trigger Modal Button -->
+                <button type="button" onclick="openReviewModal()" class="w-full py-3.5 px-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold rounded-xl shadow-lg shadow-red-950/50 transition transform active:scale-95 flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012-2m-6 9l2 2 4-4"/></svg>
+                    Review &amp; Submit Order
+                </button>
+            </div>
+        </div>
+
+    </form>
 </main>
 
 <!-- Modal / Invoice Preview Overlay -->
@@ -209,19 +194,18 @@
 
         <div class="border-t border-slate-800 pt-4 flex gap-4">
             <button type="button" onclick="closeModal()" class="flex-1 py-3 bg-slate-800 hover:bg-slate-700 font-semibold rounded-xl text-white transition">Back to Edit</button>
-            <button type="button" id="sendOrderButton" onclick="confirmOrderSubmission()" class="flex-1 py-3 bg-red-600 hover:bg-red-500 font-bold rounded-xl text-white shadow-lg transition">Confirm &amp; Send Order</button>
+            <button type="button" id="sendOrderButton" onclick="confirmAndSubmitForm()" class="flex-1 py-3 bg-red-600 hover:bg-red-500 font-bold rounded-xl text-white shadow-lg transition">Confirm &amp; Send Order</button>
         </div>
     </div>
 </div>
 
 <!-- Footer -->
 <footer class="bg-slate-900 border-t border-slate-800 mt-auto py-6 text-center text-xs text-slate-500">
-    <p>Binary Trading Cards LLC • Wholesale &amp; Consignment Division • Contact: support@binarytradingcards.com</p>
+    <p>Binary Trading Cards LLC • Wholesale &amp; Consignment Division • Contact: binarytradingcards@gmail.com</p>
 </footer>
 
 <!-- JavaScript Application Logic -->
 <script>
-    // All 46 Graded Card Guard Colors
     const colors = [
         "YELLOW", "PURPLE", "RED", "PINK", "BLUE", "GOLDEN", "CRYSTAL", "ORANGE", "CORAL", "SOLAR DUST",
         "MIDNIGHT BLUE", "CRIMSON BLACK", "OCEAN", "LUNAR", "BIOHAZARD", "THUNDERSTORM", "COSMO", "ICEBERG", "SUNSET", "SOLAR SKY",
@@ -232,15 +216,6 @@
 
     let quantities = {};
     colors.forEach(c => quantities[c] = 0);
-
-    function toggleCertUpload() {
-        const isNew = document.querySelector('input[name="partnerType"]:checked')?.value === 'new';
-        const certBlock = document.getElementById('newPartnerCertBlock');
-        certBlock.hidden = !isNew;
-        if (!isNew) {
-            document.getElementById('exemptionForm').value = '';
-        }
-    }
 
     function renderProductGrid() {
         const grid = document.getElementById('productGrid');
@@ -282,7 +257,6 @@
                 const delta = parseInt(this.getAttribute('data-delta'), 10);
                 quantities[color] = Math.max(0, (quantities[color] || 0) + delta);
                 
-                // Update specific card input value directly in DOM without rebuilding whole grid
                 const inputEl = document.querySelector(`.qty-input[data-color="${CSS.escape(color)}"]`);
                 if (inputEl) inputEl.value = quantities[color];
                 
@@ -308,7 +282,6 @@
         const shipping = (totalUnits === 0) ? 0 : (subtotal >= 300 ? 0 : 15.00);
         const grandTotal = subtotal + shipping;
 
-        // Update Summary Sidebar
         document.getElementById('summaryTotalUnits').innerText = `${totalUnits} units`;
         document.getElementById('summaryUnitPrice').innerText = `$${unitPrice.toFixed(2)} / unit`;
         document.getElementById('summarySubtotal').innerText = `$${subtotal.toFixed(2)}`;
@@ -336,12 +309,12 @@
         renderProductGrid();
     }
 
+    // Updated pricing tier: 1-49 units is $10.00
     function getUnitPrice(totalUnits) {
         if (totalUnits >= 150) return 7.00;
         if (totalUnits >= 100) return 8.00;
         if (totalUnits >= 50) return 9.00;
-        if (totalUnits >= 25) return 10.00;
-        return 12.00;
+        return 10.00; // Covers 1 to 49 units
     }
 
     function calculateOrderTotals() {
@@ -353,8 +326,8 @@
     }
 
     function updateTierProgress(totalUnits, currentPrice) {
-        let nextGoal = 25;
-        let currentTierName = "Tier 1 ($12)";
+        let nextGoal = 50;
+        let currentTierName = "1–49 Units ($10)";
         let progressPct = 0;
 
         if (totalUnits >= 150) {
@@ -364,14 +337,10 @@
             document.getElementById('tierStatusText').innerText = currentTierName;
             document.getElementById('tierNextGoal').innerText = "Max Tier Unlocked!";
         } else {
-            if (totalUnits < 25) {
-                nextGoal = 25;
-                currentTierName = "1–24 Units ($12)";
-                progressPct = (totalUnits / 25) * 100;
-            } else if (totalUnits < 50) {
+            if (totalUnits < 50) {
                 nextGoal = 50;
-                currentTierName = "25–49 Units ($10)";
-                progressPct = ((totalUnits - 25) / 25) * 100;
+                currentTierName = "1–49 Units ($10)";
+                progressPct = (totalUnits / 50) * 100;
             } else if (totalUnits < 100) {
                 nextGoal = 100;
                 currentTierName = "50–99 Units ($9)";
@@ -389,154 +358,101 @@
         document.getElementById('tierProgressBar').style.width = `${Math.min(100, Math.max(0, progressPct))}%`;
     }
 
-    let pendingOrder = null;
-    let sendingOrder = false;
     const escapeHtml = value => String(value).replace(/[&<>"']/g, char => ({"&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"}[char]));
 
-    let reviewingOrder = false;
-    async function submitOrder() {
-        if (reviewingOrder || sendingOrder) return;
-        reviewingOrder = true;
-        try {
-            const storeName = document.getElementById('storeName').value.trim();
-            const contactName = document.getElementById('contactName').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value.trim();
-            const address = document.getElementById('address').value.trim();
-            const partnerType = document.querySelector('input[name="partnerType"]:checked')?.value || 'returning';
+    function openReviewModal() {
+        const storeName = document.getElementById('storeName').value.trim();
+        const contactName = document.getElementById('contactName').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const address = document.getElementById('address').value.trim();
 
-            if (!storeName || !contactName || !email || !phone || !address) {
-                alert('Please fill out all required Retail Partner Details before submitting.');
-                return;
-            }
-
-            if (!document.getElementById('email').checkValidity()) {
-                alert('Please enter a valid email address.');
-                return;
-            }
-
-            let totalUnits = 0;
-            Object.values(quantities).forEach(q => totalUnits += q);
-            if (totalUnits === 0) {
-                alert('Please select at least one unit to order.');
-                return;
-            }
-
-            let exemptionForm = null;
-            let fileLabel = 'Not attached (will follow up if needed)';
-            if (partnerType === 'new') {
-                const file = document.getElementById('exemptionForm').files[0];
-                if (file) {
-                    if (file.size > 2 * 1024 * 1024) {
-                        alert('Tax Exempt Form must be 2 MB or smaller.');
-                        return;
-                    }
-                    const content = await new Promise((resolve, reject) => {
-                        const reader = new FileReader();
-                        reader.onload = () => resolve(reader.result.split(',')[1]);
-                        reader.onerror = () => reject(Error('Unable to read form.'));
-                        reader.readAsDataURL(file);
-                    });
-                    exemptionForm = { filename: file.name, type: file.type, content };
-                    fileLabel = escapeHtml(file.name);
-                }
-            } else {
-                fileLabel = 'On file (Returning Partner)';
-            }
-
-            const unitPrice = getUnitPrice(totalUnits);
-            const subtotal = totalUnits * unitPrice;
-            const shipping = subtotal >= 300 ? 0 : 15.00;
-            const grandTotal = subtotal + shipping;
-
-            let itemsHtml = '<ul class="divide-y divide-slate-800">';
-            colors.forEach((color, index) => {
-                const q = quantities[color];
-                if (q > 0) {
-                    itemsHtml += `<li class="py-2 flex justify-between text-xs"><span>#${index + 1} ${color} (x${q})</span> <span class="font-bold text-white">$${(q * unitPrice).toFixed(2)}</span></li>`;
-                }
-            });
-            itemsHtml += '</ul>';
-
-            pendingOrder = {
-                storeName,
-                contactName,
-                email,
-                phone,
-                address,
-                partnerType,
-                exemptionForm,
-                items: colors.filter(color => quantities[color] > 0).map(color => ({ color, quantity: quantities[color] })),
-                subtotal,
-                shipping,
-                grandTotal
-            };
-
-            const modalBody = document.getElementById('modalBody');
-            modalBody.innerHTML = `
-                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
-                    <p><strong>Store:</strong> ${escapeHtml(storeName)}</p>
-                    <p><strong>Contact:</strong> ${escapeHtml(contactName)} (${escapeHtml(phone)} / ${escapeHtml(email)})</p>
-                    <p><strong>Shipping Address:</strong> ${escapeHtml(address)}</p>
-                    <p><strong>Partner Status:</strong> ${partnerType === 'returning' ? 'Returning Wholesale Partner' : 'First-Time Wholesale Buyer'}</p>
-                    <p><strong>Resale Certificate:</strong> ${fileLabel}</p>
-                </div>
-                <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Selected Items</h4>
-                    ${itemsHtml}
-                </div>
-                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-1 text-xs">
-                    <div class="flex justify-between"><span>Total Units:</span> <strong class="text-white">${totalUnits}</strong></div>
-                    <div class="flex justify-between"><span>Unit Price Tier:</span> <strong class="text-white">$${unitPrice.toFixed(2)} / unit</strong></div>
-                    <div class="flex justify-between"><span>Subtotal:</span> <strong class="text-white">$${subtotal.toFixed(2)}</strong></div>
-                    <div class="flex justify-between"><span>Shipping:</span> <strong class="text-white">${shipping === 0 ? 'FREE' : '$15.00'}</strong></div>
-                    <div class="flex justify-between border-t border-slate-800 pt-2 text-sm font-bold text-red-400"><span>Grand Total:</span> <span>$${grandTotal.toFixed(2)}</span></div>
-                </div>
-            `;
-
-            document.getElementById('invoiceModal').classList.remove('hidden');
-        } catch (error) { 
-            alert(error.message || 'Unable to review order. Please retry.'); 
-        } finally { 
-            reviewingOrder = false; 
+        if (!storeName || !contactName || !email || !phone || !address) {
+            alert('Please fill out all required Retail Partner Details before submitting.');
+            return;
         }
+
+        if (!document.getElementById('email').checkValidity()) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+
+        let totalUnits = 0;
+        Object.values(quantities).forEach(q => totalUnits += q);
+        if (totalUnits === 0) {
+            alert('Please select at least one unit to order.');
+            return;
+        }
+
+        const unitPrice = getUnitPrice(totalUnits);
+        const subtotal = totalUnits * unitPrice;
+        const shipping = subtotal >= 300 ? 0 : 15.00;
+        const grandTotal = subtotal + shipping;
+
+        let itemsTextSummary = "";
+        let itemsHtml = '<ul class="divide-y divide-slate-800">';
+        colors.forEach((color, index) => {
+            const q = quantities[color];
+            if (q > 0) {
+                const lineStr = `#${index + 1} ${color}: ${q} units @ $${unitPrice.toFixed(2)} = $${(q * unitPrice).toFixed(2)}\n`;
+                itemsTextSummary += lineStr;
+                itemsHtml += `<li class="py-2 flex justify-between text-xs"><span>#${index + 1} ${color} (x${q})</span> <span class="font-bold text-white">$${(q * unitPrice).toFixed(2)}</span></li>`;
+            }
+        });
+        itemsHtml += '</ul>';
+
+        const fullSummaryText = 
+`--- STORE & CONTACT ---
+Store: ${storeName}
+Contact: ${contactName} (${phone} / ${email})
+Shipping Address: ${address}
+
+--- ORDER ITEMS ---
+${itemsTextSummary}
+--- FINANCIALS ---
+Total Units: ${totalUnits}
+Unit Price Tier: $${unitPrice.toFixed(2)} / unit
+Subtotal: $${subtotal.toFixed(2)}
+Shipping: ${shipping === 0 ? 'FREE ($300+ threshold)' : '$15.00'}
+Grand Total: $${grandTotal.toFixed(2)}
+
+Note: Customer notified that resale/tax-exempt certificate must be sent to binarytradingcards@gmail.com.`;
+
+        document.getElementById('hiddenOrderDetails').value = fullSummaryText;
+
+        const modalBody = document.getElementById('modalBody');
+        modalBody.innerHTML = `
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
+                <p><strong>Store:</strong> ${escapeHtml(storeName)}</p>
+                <p><strong>Contact:</strong> ${escapeHtml(contactName)} (${escapeHtml(phone)} / ${escapeHtml(email)})</p>
+                <p><strong>Shipping Address:</strong> ${escapeHtml(address)}</p>
+                <p><strong>Tax Certificate Notice:</strong> Pending email submission to binarytradingcards@gmail.com</p>
+            </div>
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Selected Items</h4>
+                ${itemsHtml}
+            </div>
+            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-1 text-xs">
+                <div class="flex justify-between"><span>Total Units:</span> <strong class="text-white">${totalUnits}</strong></div>
+                <div class="flex justify-between"><span>Unit Price Tier:</span> <strong class="text-white">$${unitPrice.toFixed(2)} / unit</strong></div>
+                <div class="flex justify-between"><span>Subtotal:</span> <strong class="text-white">$${subtotal.toFixed(2)}</strong></div>
+                <div class="flex justify-between"><span>Shipping:</span> <strong class="text-white">${shipping === 0 ? 'FREE' : '$15.00'}</strong></div>
+                <div class="flex justify-between border-t border-slate-800 pt-2 text-sm font-bold text-red-400"><span>Grand Total:</span> <span>$${grandTotal.toFixed(2)}</span></div>
+            </div>
+        `;
+
+        document.getElementById('invoiceModal').classList.remove('hidden');
     }
 
     function closeModal() {
-        if (sendingOrder) return;
         document.getElementById('invoiceModal').classList.add('hidden');
     }
 
-    async function confirmOrderSubmission() {
-        if (sendingOrder || !pendingOrder) return;
-        sendingOrder = true;
+    function confirmAndSubmitForm() {
         const button = document.getElementById('sendOrderButton');
         button.disabled = true;
-        button.textContent = 'Sending order emails…';
-        
-        try {
-            const response = await fetch('/api/orders', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(pendingOrder)
-            });
-            const result = await response.json();
-            if (!response.ok) throw new Error(result.error || 'Unable to send your order. Please retry.');
-            
-            alert(`Order submitted successfully! A confirmation copy has been sent to ${pendingOrder.email}.`);
-            sendingOrder = false;
-            closeModal();
-            pendingOrder = null;
-            document.getElementById('exemptionForm').value = '';
-            resetAllQuantities();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } catch (error) {
-            alert(error.message || 'Unable to confirm delivery. Your selections are preserved; please retry.');
-        } finally {
-            sendingOrder = false;
-            button.disabled = false;
-            button.textContent = 'Confirm & Send Order';
-        }
+        button.textContent = 'Sending order...';
+        document.getElementById('wholesaleForm').submit();
     }
 
     window.onload = function() {
